@@ -1,161 +1,167 @@
 local plugins = {
-  { lazy = true, "nvim-lua/plenary.nvim" },
+     { lazy = true, "nvim-lua/plenary.nvim" },
+     {
+          "EdenEast/nightfox.nvim",
+          priority = 1000,
+          config = true,
+     },
+     {'tpope/vim-obsession'},
+     {'tanvirtin/monokai.nvim'},
+     {'polirritmico/monokai-nightasty.nvim'},
+     {'rebelot/kanagawa.nvim'},
+     {'ribru17/bamboo.nvim'},
+     {'Pocco81/auto-save.nvim'},
+     {"mg979/vim-visual-multi"},
+     -- file tree
+     
+     {
+          "nvim-tree/nvim-tree.lua",
+          cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+          config = function()
+               require("nvim-tree").setup()
+          end,
+     },
 
-  {
-    "EdenEast/nightfox.nvim",
-    priority = 1000,
-    config = true,
-  },
+     -- icons, for UI related plugins
+     {
+          "nvim-tree/nvim-web-devicons",
+          config = function()
+               require("nvim-web-devicons").setup()
+          end,
+     },
 
-  {'tpope/vim-obsession'},
-  {'tanvirtin/monokai.nvim'},
-  {'polirritmico/monokai-nightasty.nvim'},
-  {'rebelot/kanagawa.nvim'},
-  {'ribru17/bamboo.nvim'},
-  {'Pocco81/auto-save.nvim'},
-  -- file tree
-  {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    config = function()
-      require("nvim-tree").setup()
-    end,
-  },
+     -- syntax highlighting
+     {
+          "nvim-treesitter/nvim-treesitter",
+          build = ":TSUpdate",
+          config = function()
+               require "plugins.configs.treesitter"
+         end,
+     },
 
-  -- icons, for UI related plugins
-  {
-    "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("nvim-web-devicons").setup()
-    end,
-  },
+     -- buffer + tab line
+     {
+          "akinsho/bufferline.nvim",
+          event = "BufReadPre",
+          config = function()
+               require "plugins.configs.bufferline"
+          end,
+     },
 
-  -- syntax highlighting
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-      require "plugins.configs.treesitter"
-    end,
-  },
+     -- statusline
 
-  -- buffer + tab line
-  {
-    "akinsho/bufferline.nvim",
-    event = "BufReadPre",
-    config = function()
-      require "plugins.configs.bufferline"
-    end,
-  },
+     {
+          "echasnovski/mini.statusline",
+          config = function()
+               require("mini.statusline").setup { set_vim_settings = false }
+          end,
+     },
 
-  -- statusline
+     -- we use cmp plugin only when in insert mode
+     -- so lets lazyload it at InsertEnter event, to know all the events check h-events
+     -- completion , now all of these plugins are dependent on cmp, we load them after cmp
+     {
+          "hrsh7th/nvim-cmp",
+          event = "InsertEnter",
+          dependencies = {
+               -- cmp sources
+               "hrsh7th/cmp-buffer",
+               "hrsh7th/cmp-path",
+               "hrsh7th/cmp-nvim-lsp",
+               "saadparwaiz1/cmp_luasnip",
+               "hrsh7th/cmp-nvim-lua",
 
-  {
-    "echasnovski/mini.statusline",
-    config = function()
-      require("mini.statusline").setup { set_vim_settings = false }
-    end,
-  },
+               -- snippets
+               --list of default snippets
+               "rafamadriz/friendly-snippets",
 
-  -- we use cmp plugin only when in insert mode
-  -- so lets lazyload it at InsertEnter event, to know all the events check h-events
-  -- completion , now all of these plugins are dependent on cmp, we load them after cmp
-  {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      -- cmp sources
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lua",
+               -- snippets engine
+               {
+                    "L3MON4D3/LuaSnip",
+                    config = function()
+                         require("luasnip.loaders.from_vscode").lazy_load()
+                    end,
+               },
 
-      -- snippets
-      --list of default snippets
-      "rafamadriz/friendly-snippets",
+               -- autopairs , autocompletes ()[] etc
+               {
+                    "windwp/nvim-autopairs",
+                    config = function()
+                         require("nvim-autopairs").setup()
 
-      -- snippets engine
-      {
-        "L3MON4D3/LuaSnip",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
+                         --     cmp integration
+                         local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+                         local cmp = require "cmp"
+                         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+                    end,
+               },
+          },
+          config = function()
+               require "plugins.configs.cmp"
+          end,
+     },
 
-      -- autopairs , autocompletes ()[] etc
-      {
-        "windwp/nvim-autopairs",
-        config = function()
-          require("nvim-autopairs").setup()
+     {
+          "williamboman/mason.nvim",
+          opts = {
+            ensure_installed = {
+                "clangd",
+                "clang-format",
+            }
+          },
+          build = ":MasonUpdate",
+          cmd = { "Mason", "MasonInstall" },
+          config = function()
+               require("mason").setup()
+          end,
+     },
 
-          --  cmp integration
-          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          local cmp = require "cmp"
-          cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-        end,
-      },
-    },
-    config = function()
-      require "plugins.configs.cmp"
-    end,
-  },
+     -- lsp
+     {
+          "neovim/nvim-lspconfig",
+          event = { "BufReadPre", "BufNewFile" },
+          config = function()
+               require "plugins.configs.lspconfig"
+          end,
+     },
+     -- formatting , linting
+     {
+          "stevearc/conform.nvim",
+          lazy = true,
+          config = function()
+               require "plugins.configs.conform"
+          end,
+     },
 
-  {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate",
-    cmd = { "Mason", "MasonInstall" },
-    config = function()
-      require("mason").setup()
-    end,
-  },
+     -- indent lines
+     {
+          "lukas-reineke/indent-blankline.nvim",
+          event = { "BufReadPre", "BufNewFile" },
+          config = function()
+               require("ibl").setup {
+                    indent = { char = "│" },
+                    scope = { char = "│", highlight = "Comment" },
+               }
+          end,
+     },
 
-  -- lsp
-  {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require "plugins.configs.lspconfig"
-    end,
-  },
-  -- formatting , linting
-  {
-    "stevearc/conform.nvim",
-    lazy = true,
-    config = function()
-      require "plugins.configs.conform"
-    end,
-  },
+     -- files finder etc
+     {
+          "nvim-telescope/telescope.nvim",
+          cmd = "Telescope",
+          config = function()
+               require "plugins.configs.telescope"
+          end,
+     },
 
-  -- indent lines
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("ibl").setup {
-        indent = { char = "│" },
-        scope = { char = "│", highlight = "Comment" },
-      }
-    end,
-  },
-
-  -- files finder etc
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    config = function()
-      require "plugins.configs.telescope"
-    end,
-  },
-
-  -- git status on signcolumn etc
-  {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("gitsigns").setup()
-    end,
-  },
+     -- git status on signcolumn etc
+     {
+          "lewis6991/gitsigns.nvim",
+          event = { "BufReadPre", "BufNewFile" },
+          config = function()
+               require("gitsigns").setup()
+          end,
+     },
 
 }
 

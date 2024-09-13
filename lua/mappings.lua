@@ -1,4 +1,9 @@
 local map = vim.keymap.set
+map('i', '<C-h>', '<Left>', { noremap = true, silent = true })
+map('i', '<C-j>', '<Down>', { noremap = true, silent = true })
+map('i', '<C-k>', '<Up>', { noremap = true, silent = true })
+map('i', '<C-l>', '<Right>', { noremap = true, silent = true })
+
 
 -- general mappings
 map("n", "<C-s>", "<cmd> w <CR>")
@@ -29,7 +34,7 @@ map("n", "<Space>l", "<C-w>l") -- Move to the right window
 -- bufferline, cycle buffers
 map("n", "<Tab>", "<cmd> BufferLineCycleNext <CR>")
 map("n", "<S-Tab>", "<cmd> BufferLineCyclePrev <CR>")
-map("n", "<S-w>", "<cmd> bd <CR>")
+map("n", "<S-w>", "<cmd> bd! <CR>")
 
 -- comment.nvim
 map("n", "<leader>/", "gcc", { remap = true })
@@ -41,7 +46,7 @@ map("n", "<leader>fm", function()
 end)
 
 -- Resize Windows with Ctrl + Arrow Keys
-map("n", "<C-Up>", ":resize +2<CR>")          -- Increase height with Ctrl + Up
-map("n", "<C-Down>", ":resize -2<CR>")        -- Decrease height with Ctrl + Down
-map("n", "<C-Left>", ":vertical resize -2<CR>") -- Decrease width with Ctrl + Left
-map("n", "<C-Right>", ":vertical resize +2<CR>") -- Increase width with Ctrl + Right
+-- map("n", "<Space>Up", ":resize +2<CR>")          -- Increase height with Ctrl + Up
+-- map("n", "<Space>Down", ":resize -2<CR>")        -- Decrease height with Ctrl + Down
+-- map("n", "<Space>Left", ":vertical resize -2<CR>") -- Decrease width with Ctrl + Left
+-- map("n", "<Space>Right", ":vertical resize +2<CR>") -- Increase width with Ctrl + Right
