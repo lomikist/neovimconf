@@ -46,7 +46,11 @@ map("n", "<leader>fm", function()
 end)
 
 -- Resize Windows with Ctrl + Arrow Keys
--- map("n", "<Space>Up", ":resize +2<CR>")          -- Increase height with Ctrl + Up
--- map("n", "<Space>Down", ":resize -2<CR>")        -- Decrease height with Ctrl + Down
--- map("n", "<Space>Left", ":vertical resize -2<CR>") -- Decrease width with Ctrl + Left
--- map("n", "<Space>Right", ":vertical resize +2<CR>") -- Increase width with Ctrl + Right
+ -- Increase height
+map("n", "<Space>w", ":resize +2<CR>", { noremap = true, silent = true })
+-- Decrease height
+map("n", "<Space>s", ":resize -2<CR>", { noremap = true, silent = true })
+-- Decrease width
+map("n", "<Space>a", ":vertical resize -2<CR>", { noremap = true, silent = true })
+-- Increase width
+map("n", "<Space>d", ":vertical resize +2<CR>", { noremap = true, silent = true })

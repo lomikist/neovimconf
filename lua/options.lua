@@ -21,13 +21,16 @@ o.mouse = "a"
 
 -- Numbers
 o.number = true
-
 o.signcolumn = "yes"
 o.splitbelow = true
 o.splitright = true
 o.termguicolors = true
 o.timeoutlen = 400
 o.undofile = true
+
+-- lines
+o.cursorline = true
+o.relativenumber = true
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"

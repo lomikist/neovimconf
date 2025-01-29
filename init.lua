@@ -25,6 +25,7 @@ require "plugins"
 -- vim.cmd "colorscheme kanagawa"
 -- Default options:
 -- Automatically start Obsession if a session doesn't exist
+--
 require('bamboo').setup {
   -- Main options --
   -- NOTE: to use the light theme, set `vim.o.background = 'light'`
@@ -67,7 +68,7 @@ require('bamboo').setup {
     background = true, -- use background color for virtual text
   },
 }
-vim.cmd "colorscheme bamboo"
+vim.cmd "colorscheme bamboo-light"
 
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()

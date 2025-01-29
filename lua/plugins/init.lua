@@ -12,6 +12,15 @@ local plugins = {
      {'ribru17/bamboo.nvim'},
      {'Pocco81/auto-save.nvim'},
      {"mg979/vim-visual-multi"},
+     -- {
+     --  'folke/noice.nvim',
+     --    event = "VeryLazy",
+     --    dependencies = {
+     --        "MunifTanjim/nui.nvim",
+     --        "rcarriga/nvim-notify",
+     --        "hrsh7th/nvim-cmp"
+     --    }
+     -- },
      -- file tree
      
      {
