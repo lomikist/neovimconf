@@ -172,8 +172,7 @@ local plugins = {
           end,
      },
 	-- git status on signcolumn etc
-	{
-	  "lewis6991/gitsigns.nvim",
+	{ "lewis6991/gitsigns.nvim",
 	  event = { "BufReadPre", "BufNewFile" },
 	  config = function()
 		require("gitsigns").setup {
@@ -181,7 +180,7 @@ local plugins = {
 		  current_line_blame_opts = {
 			virt_text = true,          -- Show blame as virtual text
 			virt_text_pos = 'eol',     -- Position the blame at the end of the line
-			delay = 500,               -- Delay before showing the blame
+			delay = 10,               -- Delay before showing the blame
 			ignore_whitespace = false, -- Consider whitespace changes
 		  },
 		  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
