@@ -55,10 +55,24 @@ lspconfig.lua_ls.setup {
 }
 
 -- setup multiple servers with same default options
-local servers = {"clangd", "pyright"}
+local servers = {
+    "clangd",
+    "pyright",
+    "cmake",
+    "ts_ls"
+}
 
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+for _, lsp in ipairs(servers) do 
+  local opts = {
     capabilities = capabilities,
   }
+
+  if lsp == "clangd" then
+    opts.cmd = {
+      "clangd",
+      "--compile-commands-dir=" .. vim.fn.expand("~/.config/clangd")
+    }
+  end
+
+  lspconfig[lsp].setup(opts)
 end
