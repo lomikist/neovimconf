@@ -4,6 +4,11 @@ map('i', '<C-j>', '<Down>', { noremap = true, silent = true })
 map('i', '<C-k>', '<Up>', { noremap = true, silent = true })
 map('i', '<C-l>', '<Right>', { noremap = true, silent = true })
 
+-- Show diagnostic message in a floating window (like error, warning, etc.)
+-- Triggered by pressing <leader>e in normal mode
+map('n', '<leader>e', function()
+  vim.diagnostic.open_float(nil, { focus = false })
+end, { desc = 'Show diagnostic under cursor', noremap = true, silent = true })
 
 -- general mappings
 map("n", "<C-s>", "<cmd> w <CR>")
