@@ -14,13 +14,12 @@ else
   set shortmess=aoO
 endif
 badd +1 mappings.lua
-badd +2 options.lua
-badd +1 Session.vim
-badd +4 commands.lua
-badd +0 plugins/configs/lspconfig.lua
+badd +4 options.lua
+badd +1 commands.lua
+badd +0 ~/.config/nvim/init.lua
 argglobal
 %argdel
-edit plugins/configs/lspconfig.lua
+edit ~/.config/nvim/init.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -45,12 +44,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 69 - ((38 * winheight(0) + 24) / 48)
+let s:l = 41 - ((31 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 69
-normal! 0
+keepjumps 41
+normal! 079|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

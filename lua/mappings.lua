@@ -19,7 +19,11 @@ map("t", "jf", "<C-\\><C-n>")
 map("n", "<C-c>", "<cmd> %y+ <CR>") -- copy whole filecontent
 map("n", ";", ":")
 map("n", "<S-t>", ':split | terminal<CR>', { noremap = true, silent = true })
-map('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
+map('n', '<leader>grf', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
+map('n', '<leader>grh', '<cmd>lua require("gitsigns").reset_hunk()<CR>', { noremap = true, silent = true })
+map('n', '<leader>grb', '<cmd>lua require("gitsigns").reset_buffer()<CR>', { noremap = true, silent = true })
+map('n', '<leader>gp', '<cmd>lua require("gitsigns").preview_hunk()<CR>', { noremap = true, silent = true })
+
 -- nvimtree
 map("n", "<Space>n", "<cmd> NvimTreeToggle <CR>")
 map("n", "<C-h>", "<cmd> NvimTreeFocus <CR>")
