@@ -27,46 +27,19 @@ require "plugins"
 -- Automatically start Obsession if a session doesn't exist
 --
 require('bamboo').setup {
-  -- Main options --
-  -- NOTE: to use the light theme, set `vim.o.background = 'light'`
-  style = 'vulgaris', -- Choose between 'vulgaris' (regular), 'multiplex' (greener), and 'light'
-  toggle_style_key = nil, -- Keybind to toggle theme style. Leave it nil to disable it, or set it to a string, e.g. "<leader>ts"
-  toggle_style_list = { 'vulgaris', 'multiplex', 'light' }, -- List of styles to toggle between
-  transparent = false, -- Show/hide background
-  dim_inactive = false, -- Dim inactive windows/buffers
-  term_colors = true, -- Change terminal color as per the selected theme style
-  ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
-  cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
-
-  -- Change code style ---
-  -- Options are anything that can be passed to the `vim.api.nvim_set_hl` table
-  -- You can also configure styles with a string, e.g. keywords = 'italic,bold'
-  code_style = {
-    comments = { italic = true },
-    conditionals = { italic = true },
-    keywords = {},
-    functions = {},
-    namespaces = { italic = true },
-    parameters = { italic = true },
-    strings = {},
-    variables = {},
-  },
-
-  -- Lualine options --
-  lualine = {
-    transparent = false, -- lualine center bar transparency
-  },
-
-  -- Custom Highlights --
-  colors = {}, -- Override default colors
-  highlights = {}, -- Override highlight groups
-
-  -- Plugins Config --
-  diagnostics = {
-    darker = false, -- darker colors for diagnostic
-    undercurl = true, -- use undercurl instead of underline for diagnostics
-    background = true, -- use background color for virtual text
-  },
+	style = 'vulgaris',
+	transparent = false,
+	highlights = {
+    NormalFloat = { bg = "#3b3f58", fg = "#e0e6ff" },        -- lighter dark blue-gray bg with bright text
+    FloatBorder = { bg = "#3b3f58", fg = "#a0b8ff" },        -- soft blue border
+    DiagnosticError = { fg = "#ff8f9e", bg = "#3b3f58" },    -- pastel red
+    DiagnosticWarn  = { fg = "#f5d07f", bg = "#3b3f58" },    -- pastel yellow
+    DiagnosticInfo  = { fg = "#8fc9ff", bg = "#3b3f58" },    -- pastel blue
+    DiagnosticHint  = { fg = "#b5d48f", bg = "#3b3f58" },    -- pastel green
+	GitSignsAddPreview    = { fg = "#00aa00", bg = "#3b3f58" },   -- darker green
+	GitSignsDeletePreview = { fg = "#cc4444", bg = "#3b3f58" },   -- darker red
+	GitSignsChangePreview = { fg = "#ffaa00", bg = "#3b3f58" },   -- optional: orange 
+  }
 }
 vim.cmd "colorscheme bamboo-light"
 
