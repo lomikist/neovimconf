@@ -16,7 +16,15 @@ local plugins = {
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
 		config = function()
-			require("nvim-tree").setup()
+			require("nvim-tree").setup({
+				view = {
+					side = "right"
+				},
+				update_focused_file = {
+					enable = true,
+					update_root = true,
+				},
+			})
 		end,
 	},
 
@@ -36,19 +44,6 @@ local plugins = {
 			require "plugins.configs.treesitter"
 		end,
 	},
-	{ 
-		"nvim-tree/nvim-tree.lua",
-		cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFileToggle" },
-		config = function()
-			require("nvim-tree").setup({
-				update_focused_file = {
-					enable = true,
-					update_root = true,
-				},
-			})
-		end,
-	},
-
 	-- buffer + tab line
 	{
 		"akinsho/bufferline.nvim",
@@ -218,12 +213,48 @@ local plugins = {
 			vim.api.nvim_set_hl(0, "MiniMapSymbolGitDelete", { fg = "#f7768e" })
 
 			-- auto open minimap
-			vim.api.nvim_create_autocmd("BufEnter", {
-				callback = function()
-					minimap.open()
-				end,
-			})
+			vim.keymap.set("n", "<leader>mini", function()
+				minimap.toggle()
+			end, { desc = "Toggle minimap" })
 		end,
+	},
+	--# fire effect 
+	{ 
+		"sphamba/smear-cursor.nvim",
+		event = "VeryLazy",
+		opts = {
+			opacity = 0.8,
+			trail_length = 6,
+			ease_out = 0.85,
+			refresh_rate = 40,
+			color = {
+				"#ff4500",
+				"#ff8c00",
+				"#ffd700",
+			},
+		},
+		-- chnage opts for color effect.
+		--  opts = {
+		--    cursor_color = "#ff4000",
+		--    particles_enabled = true,
+		--    stiffness = 0.5,
+		--    trailing_stiffness = 0.2,
+		--    trailing_exponent = 5,
+		--    damping = 0.6,
+		--    gradient_exponent = 0,
+		--    gamma = 1,
+		--    never_draw_over_target = true, -- if you want to actually see under the cursor
+		--    hide_target_hack = true,       -- same
+		--    particle_spread = 1,
+		--    particles_per_second = 500,
+		--    particles_per_length = 50,
+		--    particle_max_lifetime = 800,
+		--    particle_max_initial_velocity = 20,
+		--    particle_velocity_from_cursor = 0.5,
+		--    particle_damping = 0.15,
+		--    particle_gravity = -50,
+		--    min_distance_emit_particles = 0,
+		-- }
 	}
 }
 

@@ -33,6 +33,7 @@ map("n", "<leader>ff", "<cmd> Telescope find_files <CR>")
 map("n", "<leader>fo", "<cmd> Telescope oldfiles <CR>")
 map("n", "<leader>fw", "<cmd> Telescope live_grep <CR>")
 map("n", "<leader>gs", "<cmd> Telescope git_status <CR>")
+map("n", "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
 
 -- Window Navigation
 map("n", "<Space>h", "<C-w>h") -- Move to the left window
@@ -44,6 +45,30 @@ map("n", "<Space>l", "<C-w>l") -- Move to the right window
 map("n", "<Tab>", "<cmd> BufferLineCycleNext <CR>")
 map("n", "<S-Tab>", "<cmd> BufferLineCyclePrev <CR>")
 map("n", "<S-w>", "<cmd> bd! <CR>")
+
+-- copy cuurent line position for gdb inside a clipboard --
+vim.keymap.set("n", "<leader>c", function() 
+  local file = vim.fn.expand("%")
+  local line = vim.fn.line(".")
+  local text = file .. ":" .. line
+  vim.fn.setreg("+", text) -- put into system clipboard
+  vim.notify("Copied: " .. text)
+end, { desc = "Copy file:line for gdb" })
+
+-- debug build
+vim.keymap.set("n", "<leader>b", function()
+  vim.cmd("!cmake --build build/debug")
+end, { desc = "Build project with CMake" })
+
+-- debug run normal mode 
+vim.keymap.set("n", "<leader>r", function()
+  vim.cmd("!./build/debug/hvh_designer.exe")
+end, { desc = "Build project with CMake" })
+
+-- debug run cgdb
+vim.keymap.set("n", "<leader>rd", function()
+  vim.cmd("term cgdb ./build/debug/hvh_designer.exe")
+end, { desc = "Build project with CMake" })
 
 -- comment.nvim
 map("n", "<leader>/", "gcc", { remap = true })

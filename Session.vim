@@ -13,9 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +76 init.lua
-badd +70 lua/plugins/init.lua
-badd +14 lua/plugins/configs/lspconfig.lua
+badd +0 lua/plugins/init.lua
 argglobal
 %argdel
 edit lua/plugins/init.lua
@@ -32,7 +30,7 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt lua/plugins/configs/lspconfig.lua
+balt lua/plugins/init.lua
 setlocal foldmethod=manual
 setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
 setlocal foldmarker={{{,}}}
@@ -43,11 +41,11 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 68 - ((21 * winheight(0) + 24) / 48)
+let s:l = 23 - ((22 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 68
+keepjumps 23
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
