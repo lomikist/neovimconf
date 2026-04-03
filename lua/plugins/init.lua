@@ -11,7 +11,7 @@ local plugins = {
 	{'rebelot/kanagawa.nvim'},
 	{'ribru17/bamboo.nvim'},
 	{'Pocco81/auto-save.nvim'},
-	{"mg979/vim-visual-multi"}, 
+	{"mg979/vim-visual-multi"},
 	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
@@ -27,7 +27,6 @@ local plugins = {
 			})
 		end,
 	},
-
 	-- icons, for UI related plugins
 	{
 		"nvim-tree/nvim-web-devicons",
@@ -35,7 +34,6 @@ local plugins = {
 			require("nvim-web-devicons").setup()
 		end,
 	},
-
 	-- syntax highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -44,6 +42,8 @@ local plugins = {
 			require "plugins.configs.treesitter"
 		end,
 	},
+	-- Highlight group for annotations
+	-- vim.api.nvim_set_hl(0, "@todo", { fg = "#ff5555", bold = true }),
 	-- buffer + tab line
 	{
 		"akinsho/bufferline.nvim",
@@ -182,7 +182,7 @@ local plugins = {
 				current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
 			}
 		end,
-	}, 
+	},
 	-- code minimap on right side like vscode
 	{
 		"echasnovski/mini.map",
@@ -219,7 +219,7 @@ local plugins = {
 		end,
 	},
 	--# fire effect 
-	{ 
+	{
 		"sphamba/smear-cursor.nvim",
 		event = "VeryLazy",
 		opts = {
